@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PayBill - Simplify Payments. Amplify Possibilities.</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+    *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+    body{
+      background:linear-gradient(135deg,#0a0a0f,#050510,#000);
+      color:#fff;
+      overflow-x:hidden;
+    }
+    header{
+      display:flex;justify-content:space-between;align-items:center;
+      padding:20px 60px;position:fixed;width:100%;top:0;z-index:999;
+      backdrop-filter:blur(15px);
+      background:rgba(0,0,0,0.3);
+      border-bottom:1px solid rgba(255,255,255,0.1);
+    }
+    header h1{font-size:1.6em;color:#00b7ff;letter-spacing:1px;}
+    nav a{
+      margin:0 15px;text-decoration:none;color:#ccc;font-weight:500;
+      transition:0.3s;
+    }
+    nav a:hover{color:#00e0ff;}
+    .hero{
+      height:100vh;
+      background:url('https://cdn.corporatefinanceinstitute.com/assets/fintech-financial-technology.jpeg') center/cover no-repeat;
+      display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;
+      position:relative;
+    }
+    .hero::after{
+      content:"";position:absolute;top:0;left:0;width:100%;height:100%;
+      background:rgba(0,0,0,0.6);
+    }
+    .hero-content{
+      position:relative;z-index:2;max-width:700px;
+    }
+    .hero-content h2{font-size:3em;font-weight:700;line-height:1.2;}
+    .hero-content p{margin:20px 0;color:#ccc;font-size:1.1em;}
+    .cta{
+      padding:12px 30px;
+      border:none;
+      border-radius:30px;
+      background:linear-gradient(90deg,#00b7ff,#00ffb2);
+      color:#000;font-weight:600;cursor:pointer;transition:0.3s;
+    }
+    .cta:hover{transform:scale(1.05);}
+
+    section{padding:100px 60px;max-width:1200px;margin:auto;}
+    h3.section-title{text-align:center;font-size:2.2em;margin-bottom:50px;position:relative;}
+    h3.section-title::after{
+      content:"";display:block;width:80px;height:3px;margin:10px auto 0;background:#00b7ff;border-radius:2px;
+    }
+
+    .about,.services,.features,.contact{margin-top:60px;}
+    .about p{color:#bbb;font-size:1.05em;line-height:1.7;text-align:center;}
+
+    .services-cards{
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:25px;margin-top:30px;
+    }
+    .service-card{
+      background:rgba(255,255,255,0.05);border-radius:20px;padding:25px;
+      text-align:center;backdrop-filter:blur(10px);
+      transition:0.4s;border:1px solid rgba(255,255,255,0.1);
+    }
+    .service-card:hover{transform:translateY(-10px);border-color:#00e0ff;}
+    .service-card h4{margin:15px 0;color:#00b7ff;}
+
+    /* auto scrolling feature cards */
+    .feature-scroll{
+      display:flex;overflow:hidden;position:relative;
+    }
+    .feature-track{
+      display:flex;animation:scroll 30s linear infinite;
+    }
+    @keyframes scroll{
+      from{transform:translateX(0);}
+      to{transform:translateX(-50%);}
+    }
+    .feature-card{
+      min-width:300px;height:200px;margin:0 15px;
+      border-radius:20px;overflow:hidden;
+      position:relative;
+      background-size:cover;background-position:center;
+      flex-shrink:0;
+      box-shadow:0 0 20px rgba(0,0,0,0.5);
+      transition:0.3s;
+    }
+    .feature-card:hover{transform:scale(1.05);}
+    .feature-overlay{
+      position:absolute;inset:0;
+      background:rgba(0,0,0,0.55);
+      display:flex;flex-direction:column;justify-content:center;align-items:center;
+      text-align:center;padding:20px;
+    }
+    .feature-overlay h4{color:#00ffb2;margin-bottom:10px;}
+    .feature-overlay p{font-size:0.9em;color:#ddd;}
+
+    /* Contact */
+    form{
+      max-width:500px;margin:auto;display:flex;flex-direction:column;gap:15px;
+    }
+    input,textarea{
+      padding:12px 15px;border-radius:8px;border:none;outline:none;
+      background:rgba(255,255,255,0.08);color:#fff;
+    }
+    button.submit{
+      background:linear-gradient(90deg,#00b7ff,#00ffb2);
+      border:none;padding:12px;border-radius:30px;font-weight:600;color:#000;cursor:pointer;
+    }
+    button.submit:hover{opacity:0.9;}
+
+    /* Admin modal */
+    .admin-btn{
+      position:fixed;bottom:30px;right:30px;
+      background:#00b7ff;border:none;padding:12px 20px;border-radius:25px;color:#000;font-weight:600;cursor:pointer;
+    }
+    .modal{
+      position:fixed;top:0;left:0;width:100%;height:100%;
+      background:rgba(0,0,0,0.8);display:none;justify-content:center;align-items:center;
+    }
+    .modal-content{
+      background:rgba(255,255,255,0.1);padding:30px;border-radius:15px;backdrop-filter:blur(10px);
+      width:300px;text-align:center;
+    }
+    .modal-content input{width:100%;margin:10px 0;}
+    .close{color:#fff;cursor:pointer;font-size:1.3em;float:right;}
+
+    footer{text-align:center;padding:40px;color:#666;font-size:0.9em;}
+
+    @media(max-width:768px){
+      header{padding:15px 30px;}
+      .hero-content h2{font-size:2em;}
+      section{padding:80px 25px;}
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>PayBill</h1>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#features">Features</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-content">
+    <h2>Simplify Payments.<br>Amplify Possibilities.</h2>
+    <p>Seamless transfers, smart analytics, and modern financial tools—built for everyone.</p>
+    <button class="cta">Get Started</button>
+  </div>
+</section>
+
+<section id="about" class="about">
+  <h3 class="section-title">About PayBill</h3>
+  <p>PayBill is a next-gen fintech platform enabling users to send, receive, and manage funds globally with speed and security. Our mission is to bridge the gap between traditional banking and digital finance through innovation and trust.</p>
+</section>
+
+<section id="services" class="services">
+  <h3 class="section-title">Our Services</h3>
+  <div class="services-cards">
+    <div class="service-card"><h4>Instant Payments</h4><p>Send and receive money across borders instantly with no hidden fees.</p></div>
+    <div class="service-card"><h4>Virtual Cards</h4><p>Create virtual debit cards for secure online transactions anytime, anywhere.</p></div>
+    <div class="service-card"><h4>Crypto Wallet</h4><p>Buy, store, and trade digital assets securely within your PayBill dashboard.</p></div>
+    <div class="service-card"><h4>Analytics</h4><p>Track spending, analyze trends, and manage your finances like a pro.</p></div>
+  </div>
+</section>
+
+<section id="features" class="features">
+  <h3 class="section-title">Key Features</h3>
+  <div class="feature-scroll">
+    <div class="feature-track">
+      <div class="feature-card" style="background-image:url('https://cdn.corporatefinanceinstitute.com/assets/fintech-financial-technology.jpeg');">
+        <div class="feature-overlay"><h4>Next-Gen Interface</h4><p>Intuitive and user-centric dashboard for your finances.</p></div>
+      </div>
+      <div class="feature-card" style="background-image:url('https://www.investopedia.com/thmb/Sd_BguVajrCw6oNiL7_QCVxTlQA=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-1478036824-ce11e12d17734f81bfaf85bb5698dc0d.jpg');">
+        <div class="feature-overlay"><h4>Seamless Transfers</h4><p>Real-time payments that just work—globally.</p></div>
+      </div>
+      <div class="feature-card" style="background-image:url('https://www.centralbank.ie/images/default-source/consumer-hub/explainers---banner-images/fintech_ex_banner.jpg?sfvrsn=440aaa1d_4');">
+        <div class="feature-overlay"><h4>AI Security</h4><p>Cutting-edge fraud detection & verification layers.</p></div>
+      </div>
+      <div class="feature-card" style="background-image:url('https://media.licdn.com/dms/image/C5612AQFlbSQsJktbIg/article-cover_image-shrink_600_2000/0/1520953671118?e=2147483647&v=beta&t=1tcVe04tt9dkN7E5UOOs6dCHnFrpcyU11KD_y3lwi78');">
+        <div class="feature-overlay"><h4>Global Reach</h4><p>Payments that scale with your ambitions.</p></div>
+      </div>
+      <div class="feature-card" style="background-image:url('https://cdn.betakit.com/wp-content/uploads/2024/04/FinTech.jpg');">
+        <div class="feature-overlay"><h4>24/7 Support</h4><p>Always-on customer service whenever you need it.</p></div>
+      </div>
+      <!-- duplicate for smooth loop -->
+      <div class="feature-card" style="background-image:url('https://cdn.corporatefinanceinstitute.com/assets/fintech-financial-technology.jpeg');">
+        <div class="feature-overlay"><h4>Next-Gen Interface</h4><p>Intuitive and user-centric dashboard for your finances.</p></div>
+      </div>
+      <div class="feature-card" style="background-image:url('https://www.investopedia.com/thmb/Sd_BguVajrCw6oNiL7_QCVxTlQA=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-1478036824-ce11e12d17734f81bfaf85bb5698dc0d.jpg');">
+        <div class="feature-overlay"><h4>Seamless Transfers</h4><p>Real-time payments that just work—globally.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <h3 class="section-title">Get in Touch</h3>
+  <form>
+    <input type="text" placeholder="Your Name" required>
+    <input type="email" placeholder="Your Email" required>
+    <textarea rows="4" placeholder="Your Message" required></textarea>
+    <button class="submit">Send Message</button>
+  </form>
+</section>
+
+<button class="admin-btn" onclick="openModal()">Admin</button>
+
+<div class="modal" id="adminModal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <h4>Admin Login</h4>
+    <input type="text" placeholder="Username" id="adminUser">
+    <input type="password" placeholder="Password" id="adminPass">
+    <button class="submit" onclick="checkAdmin()">Login</button>
+    <p id="adminMsg" style="margin-top:10px;color:#f44;"></p>
+  </div>
+</div>
+
+<footer>
+  © 2025 PayBill Inc. All Rights Reserved.
+</footer>
+
+<script>
+  const modal=document.getElementById('adminModal');
+  function openModal(){modal.style.display='flex';}
+  function closeModal(){modal.style.display='none';}
+  window.onclick=e=>{if(e.target==modal)closeModal();}
+  function checkAdmin(){
+    const u=document.getElementById('adminUser').value;
+    const p=document.getElementById('adminPass').value;
+    const msg=document.getElementById('adminMsg');
+    if(u==='admin'&&p==='paybill123'){
+      msg.style.color='#0f0';msg.textContent='Access granted ✔';
+      setTimeout(closeModal,1500);
+    }else{msg.style.color='#f44';msg.textContent='Invalid credentials ❌';}
+  }
+</script>
+
+</body>
+</html>
